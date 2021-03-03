@@ -926,7 +926,7 @@ static int MechaAdjGetError(short int argc, char *argv[])
                 {
                     printf("DVD Error Data:\n"
                            "PI Correct:\t\t%#04x\tPO Correct:\t\t%#04x\n"
-                           "PI Non-correct:\t%%#04x\tPO Non-correct:\t%#04x\n"
+                           "PI Non-correct:\t%#04x\tPO Non-correct:\t%#04x\n"
                            "PI Max:\t\t\t%#04x\tPO Max:\t\t\t%#04x\n"
                            "Jitter:\t\t\t%#04x\n",
                            DvdError.PICorrect, DvdError.PINCorrect, DvdError.PIMax,
@@ -1580,7 +1580,7 @@ static void MechaCommonMain(const struct MechaDiagCommand *commands, char prompt
     do
     {
         printf("MD1.%d %c> ", md, prompt);
-        gets(input);
+        fgets(input, sizeof(input), stdin);
         if (input[0] != '\0')
             strcpy(previous, input);
         else
@@ -1655,9 +1655,9 @@ static INT_PTR CALLBACK MechaDlg(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM 
             switch (LOWORD(wParam))
             {
                     //Adjust mechanics
-                    //	MechaAdjMain();
+                    //MechaAdjMain();
                     //Test mechanics
-                    //	MechaTestMain();
+                    //MechaTestMain();
 
                 case IDCLOSE:
                     EndDialog(hwndDlg, TRUE);

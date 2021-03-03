@@ -23,7 +23,9 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: PMAP
-          path: Release/PMAPwin.exe
+          path: |
+            Release/*.exe
+
 
   # release:
     # needs: [build]

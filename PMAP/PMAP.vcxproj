@@ -10,25 +10,6 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\base\eeprom-main.c" />
-    <ClCompile Include="..\base\eeprom.c" />
-    <ClCompile Include="..\base\elect-main.c" />
-    <ClCompile Include="..\base\elect.c" />
-    <ClCompile Include="..\base\mecha-main.c" />
-    <ClCompile Include="..\base\mecha.c" />
-    <ClCompile Include="..\base\updates.c" />
-    <ClCompile Include="main.c" />
-    <ClCompile Include="platform.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\base\eeprom.h" />
-    <ClInclude Include="..\base\elect.h" />
-    <ClInclude Include="..\base\main.h" />
-    <ClInclude Include="..\base\mecha.h" />
-    <ClInclude Include="..\base\updates.h" />
-    <ClInclude Include="platform.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0E04D283-E9CF-4B50-AB74-887A62600457}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -58,11 +39,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -96,6 +75,25 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\base\eeprom-main.c" />
+    <ClCompile Include="..\base\eeprom.c" />
+    <ClCompile Include="..\base\elect-main.c" />
+    <ClCompile Include="..\base\elect.c" />
+    <ClCompile Include="..\base\mecha-main.c" />
+    <ClCompile Include="..\base\mecha.c" />
+    <ClCompile Include="..\base\updates.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="platform.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\base\eeprom.h" />
+    <ClInclude Include="..\base\elect.h" />
+    <ClInclude Include="..\base\main.h" />
+    <ClInclude Include="..\base\mecha.h" />
+    <ClInclude Include="..\base\updates.h" />
+    <ClInclude Include="platform.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

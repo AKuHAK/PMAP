@@ -368,12 +368,14 @@ void MenuEEPROM(void)
                 break;
             case 2:
                 printf("Enter dump filename: ");
-                gets(filename);
+                fgets(filename, sizeof(filename), stdin);
+                // gets(filename);
                 printf("Dump %s.\n", DumpEEPROM(filename) == 0 ? "completed" : "failed");
                 break;
             case 3:
                 printf("Enter dump filename: ");
-                gets(filename);
+                fgets(filename, sizeof(filename), stdin);
+                // gets(filename);
                 printf("Restore %s.\n", RestoreEEPROM(filename) == 0 ? "completed" : "failed");
                 break;
             case 4:
