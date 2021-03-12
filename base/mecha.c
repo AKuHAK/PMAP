@@ -49,7 +49,7 @@ int MechaCommandExecute(unsigned short int command, unsigned short int timeout, 
 {
     char cmd[MECHA_TX_BUFFER_SIZE];
     unsigned short int size;
-    int result;
+    int result = 0;
 
     if (args != NULL)
         sprintf(cmd, "%03x%s\r\n", command, args);
@@ -94,7 +94,7 @@ int MechaCommandExecuteList(MechaCommandTxHandler_t transmit, MechaCommandRxHand
     char RxBuffer[MECHA_RX_BUFFER_SIZE];
     struct MechaTask *task;
     unsigned short int i;
-    int result, size;
+    int result = 0, size;
 
     for (i = 0, task = tasks; i < TaskCount; i++, task++)
     {
@@ -692,12 +692,16 @@ const char *MechaGetDesc(void)
             else
                 return "unknown";
         case MECHA_TYPE_40:
-            if (!pstrincmp(MechaName, "000005", 6))
+            if (!pstrincmp(MechaName, "000005", 6) || !pstrincmp(MechaName, "000105", 6))
                 return "CXR706080-101GG";
-            else if (!pstrincmp(MechaName, "000205", 6))
+            else if (!pstrincmp(MechaName, "000205", 6) || !pstrincmp(MechaName, "000305", 6))
                 return "CXR706080-102GG";
             else if (!pstrincmp(MechaName, "000405", 6) || !pstrincmp(MechaName, "000505", 6))
                 return "CXR706080-103GG";
+            else if (!pstrincmp(MechaName, "000A05", 6))
+                return "CXR706080-702GG";
+            else if (!pstrincmp(MechaName, "000C05", 6))
+                return "CXR706080-703GG";
             else
                 return "unknown";
         default:

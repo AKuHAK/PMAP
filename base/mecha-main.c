@@ -1678,8 +1678,8 @@ void MenuMECHA(void)
                        "\t3. Quit\n"
                        "Your choice: ");
                 input = 0;
-                scanf("%d", &input);
-                while (getchar() != '\n') {};
+                if (scanf("%d", &input) > 0)
+                    while (getchar() != '\n') {};                
             } while (input < 1 || input > 3);
 
             switch (input)

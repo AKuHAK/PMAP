@@ -1159,10 +1159,11 @@ static int ElectJudgeCDTPP(const char *data, int len)
     unsigned short int value1, value2, value3;
     int sub32, Tbal;
 
-    number[2] = '\0';
     strncpy(number, &data[1], 2);
+    number[2] = '\0';
     value1 = (unsigned short int)strtoul(number, NULL, 16);
     strncpy(number, &data[3], 2);
+    number[2] = '\0';
     value2 = (unsigned short int)strtoul(number, NULL, 16);
     value3 = (unsigned short int)strtoul(&data[5], NULL, 16);
     value1 -= value2;
@@ -1198,13 +1199,15 @@ static int JudgeDVDSLFocusOffset(const char *data, int len)
     char value[3];
     float min, max, offset;
 
-    value[2] = '\0';
     strncpy(value, &data[3], 2);
+    value[2] = '\0';
     value2 = (unsigned short int)strtoul(value, NULL, 16);
     strncpy(value, &data[5], 2);
+    value[2] = '\0';
     value3 = (unsigned short int)strtoul(value, NULL, 16);
     strncpy(value, &data[11], 2);
-    value6         = (unsigned short int)strtoul(value, NULL, 16);
+    value[2] = '\0';
+    value6 = (unsigned short int)strtoul(value, NULL, 16);
 
     ConFocusOffset = value2 - value3;
     min            = 0.0f;
@@ -1264,8 +1267,8 @@ static int JudgeDVDSLFBOffset(const char *data, int len)
     char number[3];
     unsigned short int FbOffsetHi, FbOffsetLo;
 
-    number[2] = '\0';
     strncpy(number, &data[5], 2);
+    number[2] = '\0';
     FbOffsetHi = (unsigned short int)strtoul(number, NULL, 16);
     FbOffsetLo = (unsigned short int)strtoul(&data[7], NULL, 16);
 

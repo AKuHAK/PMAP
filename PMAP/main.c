@@ -106,8 +106,8 @@ int main(int argc, char *argv[])
                    "Your choice: ");
 
             choice = 0;
-            scanf("%hd", &choice);
-            while (getchar() != '\n') {};
+            if (scanf("%hd", &choice) > 0)
+                while (getchar() != '\n') {};
 
 #ifdef ID_MANAGEMENT
             if (choice == 99)

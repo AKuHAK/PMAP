@@ -51,7 +51,7 @@ static int DumpEEPROM(const char *filename)
 static int RestoreEEPROM(const char *filename)
 {
     FILE *dump;
-    int i, progress, result;
+    int i, progress, result = 0;
     u16 data;
 
     printf("\nRestoring EEPROM:\n");
@@ -140,8 +140,9 @@ static int UpdateEEPROM(int chassis)
                        "\t2. SANYO\n"
                        "Your choice: ");
                 OpticalBlock = 0;
-                scanf("%d", &OpticalBlock);
-                while (getchar() != '\n') {};
+
+                if (scanf("%d", &OpticalBlock) > 0)
+                    while (getchar() != '\n') {};
             } while (OpticalBlock < 1 || OpticalBlock > 2);
             OpticalBlock--;
         }
@@ -157,8 +158,8 @@ static int UpdateEEPROM(int chassis)
                        "\t2. T609K\n"
                        "Your choice: ");
                 ObjectLens = 0;
-                scanf("%d", &ObjectLens);
-                while (getchar() != '\n') {};
+                if (scanf("%d", &ObjectLens) > 0)
+                    while (getchar() != '\n') {};
             } while (ObjectLens < 1 || ObjectLens > 2);
             ObjectLens--;
         }
@@ -281,8 +282,8 @@ static int SelectChassis(void)
         {
             printf("Choice: ");
             choice = 0;
-            scanf("%d", &choice);
-            while (getchar() != '\n') {};
+            if (scanf("%d", &choice) > 0)
+                while (getchar() != '\n') {};
         } while (choice < 1 || choice > i + 1);
 
         --choice;
@@ -355,9 +356,9 @@ void MenuEEPROM(void)
                    "\nYour choice: ",
                    chassis < 0 ? "Unknown" : ChassisNames[chassis]);
             choice = 0;
-            scanf("%hd", &choice);
-            while (getchar() != '\n') {};
-        } while (choice < 1 || choice > 17);
+            if (scanf("%hd", &choice) > 0)
+                while (getchar() != '\n') {};
+        } while (choice < 1 || choice > 18);
 
         switch (choice)
         {
@@ -369,12 +370,14 @@ void MenuEEPROM(void)
             case 2:
                 printf("Enter dump filename: ");
                 fgets(filename, sizeof(filename), stdin);
+                filename[strlen(filename) - 1] = '\0';
                 // gets(filename);
                 printf("Dump %s.\n", DumpEEPROM(filename) == 0 ? "completed" : "failed");
                 break;
             case 3:
                 printf("Enter dump filename: ");
                 fgets(filename, sizeof(filename), stdin);
+                filename[strlen(filename) - 1] = '\0';
                 // gets(filename);
                 printf("Restore %s.\n", RestoreEEPROM(filename) == 0 ? "completed" : "failed");
                 break;
