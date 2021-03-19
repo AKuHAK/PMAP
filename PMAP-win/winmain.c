@@ -35,7 +35,7 @@ static void InitRawConVerInfoMenu(HWND hwnd)
     SetWindowTextA(GetDlgItem(hwnd, IDC_STATIC_MD_VER), buffer);
     sprintf(buffer, "0x%08x", RawData->cfc);
     SetWindowTextA(GetDlgItem(hwnd, IDC_STATIC_CFC), buffer);
-    sprintf(buffer, "0x%08x", RawData->cfd);
+    sprintf(buffer, "0x%p", RawData->cfd);
     SetWindowTextA(GetDlgItem(hwnd, IDC_STATIC_CFD), buffer);
     sprintf(buffer, "0x%04x", RawData->VersionID);
     SetWindowTextA(GetDlgItem(hwnd, IDC_STATIC_CON_VER), buffer);
@@ -88,7 +88,7 @@ static void ToggleMainDialogControls(HWND hwndDlg, int connected)
 static int ConnectToConsole(HWND hwnd)
 {
     char PortName[] = "COM1";
-    int port, result;
+    int port = 0, result;
 
     if ((port = SendMessage(GetDlgItem(hwnd, IDC_COMBO_PORT), CB_GETCURSEL, 0, 0)) == CB_ERR)
     {
@@ -96,7 +96,8 @@ static int ConnectToConsole(HWND hwnd)
         return EINVAL;
     }
 
-    PortName[3] = '0' + port;
+    PortName[3] = '0' + port + 1;
+
     if ((result = PlatOpenCOMPort(PortName)) != 0)
         MessageBox(hwnd, L"Cannot open the selected port.", L"Cannot open port", MB_OK | MB_ICONERROR);
 
@@ -259,7 +260,7 @@ static INT_PTR CALLBACK MainDlg(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM l
     return result;
 }
 
-int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
+int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR pCmdLine, int nCmdShow)
 {
     g_hInstance = hInstance;
     DialogBox(hInstance, MAKEINTRESOURCE(IDD_DIALOG_MAIN), NULL, &MainDlg);

@@ -1585,6 +1585,7 @@ static void MechaCommonMain(const struct MechaDiagCommand *commands, char prompt
             strcpy(previous, input);
         else
             strcpy(input, previous);
+        argv[0] = NULL;
         for (argc = 0, pTok = strtok(input, " "); pTok != NULL && argc < MECHA_ADJ_MAX_ARGS; argc++)
         {
             argv[argc] = pTok;

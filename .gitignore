@@ -5,3 +5,7 @@
 *.filters
 *.user
 *.exe
+*.log
+.vs
+Debug
+Release

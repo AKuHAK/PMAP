@@ -18,7 +18,7 @@ void DisplayRawIdentData(void)
     RawData = MechaGetRawIdent();
 
     printf("\nTestMode.%d MD1.%d\n"
-           "CFD:\t\t%#08x\n"
+           "CFD:\t\t0x%s\n"
            "CFC:\t\t%#08x\n"
            "Version:\t%#04x\n",
            tm, md, RawData->cfd, RawData->cfc, RawData->VersionID);
@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
 
     if (argc != 2)
     {
-        printf("Syntax error. Syntax: PS2CDVDTool <COM port>\n");
+        printf("Syntax error. Syntax: PMAP <COM port>\n");
         return EINVAL;
     }
 
@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
     {
         do
         {
-            printf("\nP.M.A.P (v1.11)\n"
+            printf("\nP.M.A.P (v1.11.1beta)\n"
                    "=============================\n"
                    "\t1.\tEEPROM management\n"
                    "\t2.\tAutomatic ELECT adjustment\n"

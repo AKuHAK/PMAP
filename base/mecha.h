@@ -7,7 +7,8 @@
 
 struct MechaIdentRaw
 {
-    u32 cfc, cfd;
+    u32 cfc;
+    char cfd[11];
     u16 VersionID; //As the updates for B, C and D chassis are seen to be changing this ID, it's probably not a hardware model number. Known within the SONY tools as ADD0x010
 };
 
@@ -321,17 +322,18 @@ enum RX_ERROR
 /*	MECHACON name: TestMode, MD
 	00C10024 -> TestMode193 MD1.36
 	
-	TestMode.193	MD1.36 CXP101064-605R	-> Type 6
-	TestMode.194	MD1.36 CXP101064-602R	-> Type 6
-	TestMode.6		MD1.38 CXP102064-003R	-> Type 8
-	TestMode.19		MD1.39 CXP102064-005R	-> Type 0
-	TestMode.139	CXP103049-xxx for F-chassis
+	TestMode.193		MD1.36 CXP101064-605R	-> Type 6
+	TestMode.194		MD1.36 CXP101064-602R	-> Type 6
+	TestMode.6		    MD1.38 CXP102064-003R	-> Type 8
+	TestMode.19		    MD1.39 CXP102064-005R	-> Type 0
+	TestMode.139		CXP103049-xxx for F-chassis
 	
 	Type (reg 0x10) 0xA809 -> Type 1
 	Type (reg 0x10) 0xA829 -> Type 1
 	Type (reg 0x10) 0xB009 -> Type (reg 0x10) 0xB029:
-		MECHA 000603 -> Type 2
-		MECHA 000803 -> Type 3	*/
+		  MECHA 000603 -> Type 2
+		  MECHA 000803 -> Type 3	
+*/
 
 enum MECHA_TYPE
 {
