@@ -48,6 +48,29 @@ static int DumpEEPROM(const char *filename)
     return result;
 }
 
+static int EEPROM_c8d(void)
+{
+    int result;
+    char args[3];
+    char filename[10];
+    char buffer[8];
+    unsigned int i;
+
+    DumpEEPROM("default.bin");
+    for (i = 0; i < 0x100; i++)
+    {
+        sprintf(args, "%02x", i);
+        if ((result = MechaCommandExecute(MECHA_CMD_EEPROM_ERASE, MECHA_TASK_LONG_TO, "eeee", buffer, sizeof(buffer))) > 0)
+            if ((result = MechaCommandExecute(MECHA_CMD_CLEAR_CONF, MECHA_TASK_LONG_TO, args, buffer, sizeof(buffer))) > 0)
+            {
+                sprintf(filename, "%03x%s.bin", MECHA_CMD_CLEAR_CONF, args);
+                result = DumpEEPROM(filename);
+            }
+    }
+
+    return result;
+}
+
 static int RestoreEEPROM(const char *filename)
 {
     FILE *dump;
@@ -349,7 +372,7 @@ void MenuEEPROM(void)
                    "\t1. Display console information\n"
                    "\t2. Dump EEPROM\n"
                    "\t3. Restore EEPROM\n"
-                   "\t4. Erase EEPROM\n"
+                   "\t4. c8d\n"
                    "\t5. Load defaults (All)\n"
                    "\t6. Load defaults (Disc Detect)\n"
                    "\t7. Load defaults (Servo)\n"
@@ -404,7 +427,7 @@ void MenuEEPROM(void)
 #ifdef ID_MANAGEMENT
                 printf("EEPROM erase %s.\n", EEPROMClear() == 0 ? "completed" : "failed");
 #else
-                printf("Function disabled.\n");
+                printf("c8d %s.\n", EEPROM_c8d() == 0 ? "completed" : "failed");
 #endif
                 break;
             case 5:
