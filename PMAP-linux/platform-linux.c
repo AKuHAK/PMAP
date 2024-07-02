@@ -6,14 +6,16 @@
 #include <fcntl.h>
 #include <termios.h>
 #include <sys/select.h>
+#include <time.h>
 #include <ctype.h>
 
-#include "platform.h"
+#include "../base/platform.h"
 #include "../base/mecha.h"
 
 static int ComPortFD = -1;
 // static unsigned short RxTimeout;
 static struct termios OldTio;
+static FILE *DebugOutputFile = NULL;
 
 int PlatOpenCOMPort(const char *device)
 {
@@ -99,6 +101,44 @@ void PlatShowMessageB(const char *format, ...)
     va_end(args);
 }
 
+void PlatDebugInit(void)
+{
+    // Get the current time
+    time_t rawtime;
+    struct tm *timeinfo;
+    char timestamp[20]; // Adjust the size according to your needs
+
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+
+    // Format the timestamp (e.g., "2023-10-14_12-34-56")
+    strftime(timestamp, sizeof(timestamp), "%Y-%m-%d_%H-%M-%S", timeinfo);
+
+    // Create the filename with timestamp
+    char filename[256]; // Adjust the size according to your needs
+    snprintf(filename, sizeof(filename), "pmap_%s.log", timestamp);
+
+    DebugOutputFile = fopen(filename, "w");
+}
+
+void PlatDebugDeinit(void)
+{
+    if (DebugOutputFile != NULL)
+    {
+        fclose(DebugOutputFile);
+        DebugOutputFile = NULL;
+    }
+}
+
+void PlatDPrintf(const char *format, ...)
+{
+    va_list args;
+
+    va_start(args, format);
+    if (DebugOutputFile != NULL)
+        vfprintf(DebugOutputFile, format, args);
+    va_end(args);
+}
 
 int pstricmp(const char *s1, const char *s2)
 {
