@@ -75,7 +75,8 @@ int main(int argc, char *argv[])
 
     if (argc != 2)
     {
-        printf("Syntax error. Syntax: PMAP <COM port>\n");
+        printf("Usage: PMAP <COM device>\n\n"
+               "Device examples: COM1 on Windows or /dev/ttyUSB0 on Linux\n\n");
         return EINVAL;
     }
 
