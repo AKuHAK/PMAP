@@ -1309,12 +1309,12 @@ static int ElectJudgeCDTPP(const char *data, int len)
 
         if (Tbal >= -30 && Tbal <= 30)
         {
-            PlatDPrintf("CD TPP Tbal  OK: %ld\n", Tbal);
+            PlatDPrintf("CD TPP Tbal  OK: %d\n", Tbal);
             return 0;
         }
         else
         {
-            PlatShowEMessage("CD TPP Tbal NG: %ld\n", Tbal);
+            PlatShowEMessage("CD TPP Tbal NG: %d\n", Tbal);
             return (ConSlim == 1) ? 0 : 1;
         }
     }

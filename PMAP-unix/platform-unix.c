@@ -246,7 +246,6 @@ void PlatShowMessageB(const char *format, ...)
     // Print to standard output
     va_start(args, format);
     vprintf(format, args);
-    vprintf(format, args);
     va_end(args); // Clean up after using args for vprintf
 
     // Print to debug output file, if specified
